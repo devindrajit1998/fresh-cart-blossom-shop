@@ -216,10 +216,10 @@ const ProductListing = () => {
           <p className="text-gray-600">Discover our fresh and quality products</p>
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           {/* Filters Sidebar */}
-          <div className="w-80 space-y-6">
-            <Card className="p-6">
+          <div className="w-full lg:w-80 space-y-6">
+            <Card className="p-4 lg:p-6">
               <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
                 <Filter className="h-5 w-5 mr-2" />
                 Filters
@@ -292,16 +292,16 @@ const ProductListing = () => {
           </div>
 
           {/* Main Content */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             {/* Toolbar */}
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
               <div className="flex items-center space-x-4">
                 <span className="text-sm text-gray-600">Showing 1-6 of 24 products</span>
               </div>
               
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-48">
+                  <SelectTrigger className="w-full sm:w-48">
                     <SelectValue placeholder="Sort by" />
                   </SelectTrigger>
                   <SelectContent>
@@ -313,7 +313,7 @@ const ProductListing = () => {
                   </SelectContent>
                 </Select>
                 
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 justify-center sm:justify-start">
                   <Button
                     variant={viewMode === 'grid' ? 'default' : 'outline'}
                     size="sm"
@@ -333,14 +333,14 @@ const ProductListing = () => {
             </div>
 
             {/* Products Grid */}
-            <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+            <div className={`grid gap-4 md:gap-6 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1'}`}>
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center items-center space-x-2 mt-12">
+            <div className="flex justify-center items-center flex-wrap gap-2 mt-12">
               <Button variant="outline" size="sm" disabled>Previous</Button>
               <Button variant="default" size="sm">1</Button>
               <Button variant="outline" size="sm">2</Button>

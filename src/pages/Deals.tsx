@@ -130,20 +130,20 @@ const Deals = () => {
       {/* Filters and Search */}
       <section className="py-8 bg-white border-b">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+          <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
             
             {/* Category Filters */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 w-full lg:w-auto">
               {dealCategories.map((category) => (
                 <Button
                   key={category.id}
                   variant={activeFilter === category.id ? "default" : "outline"}
                   size="sm"
                   onClick={() => setActiveFilter(category.id)}
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-1 sm:space-x-2"
                 >
                   <category.icon className="h-4 w-4" />
-                  <span>{category.name}</span>
+                  <span className="text-xs sm:text-sm">{category.name}</span>
                 </Button>
               ))}
             </div>
@@ -166,7 +166,7 @@ const Deals = () => {
       {/* Deals Grid */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {filteredDeals.map((deal) => (
               <Card key={deal.id} className="group hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                 <div className="relative">
@@ -175,34 +175,34 @@ const Deals = () => {
                     alt={deal.title}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-red-500 text-white">
+                  <div className="absolute top-3 left-3">
+                    <Badge className="bg-red-500 text-white text-xs">
                       -{deal.discount}%
                     </Badge>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-primary text-white">
+                  <div className="absolute top-3 right-3">
+                    <Badge className="bg-primary text-white text-xs">
                       {deal.badge}
                     </Badge>
                   </div>
-                  <div className="absolute bottom-4 left-4">
-                    <div className="flex items-center space-x-1 bg-black/50 text-white px-2 py-1 rounded text-sm">
+                  <div className="absolute bottom-3 left-3">
+                    <div className="flex items-center space-x-1 bg-black/50 text-white px-2 py-1 rounded text-xs">
                       <Clock className="h-3 w-3" />
                       <span>{deal.timeLeft}</span>
                     </div>
                   </div>
                 </div>
                 
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{deal.title}</h3>
-                  <p className="text-gray-600 mb-4">{deal.description}</p>
+                <CardContent className="p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{deal.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600 mb-4">{deal.description}</p>
                   
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-2">
                     <div className="flex items-center space-x-2">
-                      <span className="text-2xl font-bold text-primary">${deal.salePrice}</span>
-                      <span className="text-lg text-gray-500 line-through">${deal.originalPrice}</span>
+                      <span className="text-xl sm:text-2xl font-bold text-primary">${deal.salePrice}</span>
+                      <span className="text-base sm:text-lg text-gray-500 line-through">${deal.originalPrice}</span>
                     </div>
-                    <Badge className="bg-green-100 text-green-800">
+                    <Badge className="bg-green-100 text-green-800 text-xs">
                       Save ${(deal.originalPrice - deal.salePrice).toFixed(2)}
                     </Badge>
                   </div>

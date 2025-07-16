@@ -61,15 +61,15 @@ const Contact = () => {
       {/* Contact Info Cards */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {contactInfo.map((info, index) => (
-              <Card key={index} className="text-center p-6 hover:shadow-lg transition-shadow duration-300">
+              <Card key={index} className="text-center p-4 lg:p-6 hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-0">
-                  <div className={`w-16 h-16 ${info.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                    <info.icon className="h-8 w-8 text-white" />
+                  <div className={`w-12 h-12 sm:w-16 sm:h-16 ${info.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <info.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{info.title}</h3>
-                  <p className="text-gray-600">{info.content}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">{info.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-600">{info.content}</p>
                 </CardContent>
               </Card>
             ))}
@@ -80,18 +80,18 @@ const Contact = () => {
       {/* Contact Form and Map */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             
             {/* Contact Form */}
-            <Card className="p-8">
+            <Card className="p-6 lg:p-8">
               <CardHeader className="px-0 pt-0">
-                <CardTitle className="text-2xl font-bold text-gray-900 font-playfair">
+                <CardTitle className="text-xl sm:text-2xl font-bold text-gray-900 font-playfair">
                   Send us a Message
                 </CardTitle>
               </CardHeader>
               <CardContent className="px-0 pb-0">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         First Name
@@ -176,9 +176,9 @@ const Contact = () => {
 
             {/* Map and Additional Info */}
             <div className="space-y-8">
-              <Card className="p-8">
+              <Card className="p-6 lg:p-8">
                 <CardHeader className="px-0 pt-0">
-                  <CardTitle className="text-2xl font-bold text-gray-900 font-playfair">
+                  <CardTitle className="text-xl sm:text-2xl font-bold text-gray-900 font-playfair">
                     Visit Our Store
                   </CardTitle>
                 </CardHeader>
@@ -188,9 +188,9 @@ const Contact = () => {
                       Come visit our flagship store and experience our fresh products firsthand. 
                       Our knowledgeable staff is always ready to help you find what you need.
                     </p>
-                    <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
+                    <div className="bg-gray-200 rounded-lg h-48 sm:h-64 flex items-center justify-center">
                       <div className="text-center">
-                        <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-2" />
+                        <MapPin className="h-8 w-8 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-2" />
                         <p className="text-gray-500">Interactive Map</p>
                         <p className="text-sm text-gray-400">Map integration would go here</p>
                       </div>
@@ -199,9 +199,9 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              <Card className="p-8">
+              <Card className="p-6 lg:p-8">
                 <CardHeader className="px-0 pt-0">
-                  <CardTitle className="text-xl font-bold text-gray-900">
+                  <CardTitle className="text-lg sm:text-xl font-bold text-gray-900">
                     Frequently Asked Questions
                   </CardTitle>
                 </CardHeader>

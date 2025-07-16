@@ -97,7 +97,7 @@ const ProductDetail = () => {
         </div>
 
         {/* Product Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           {/* Product Images */}
           <div className="space-y-4">
             <div className="aspect-square overflow-hidden rounded-2xl bg-gray-100">
@@ -107,12 +107,12 @@ const ProductDetail = () => {
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 overflow-x-auto pb-2">
               {product.images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${
+                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 flex-shrink-0 ${
                     selectedImage === index ? 'border-primary' : 'border-gray-200'
                   }`}
                 >
@@ -159,7 +159,7 @@ const ProductDetail = () => {
               </div>
 
               {/* Product Info */}
-              <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 text-sm">
                 <div>
                   <span className="text-gray-500">SKU:</span>
                   <span className="ml-2 font-medium">{product.sku}</span>
@@ -210,7 +210,7 @@ const ProductDetail = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex space-x-4 mb-6">
+              <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 mb-6">
                 <Button 
                   size="lg" 
                   className="flex-1 bg-gradient-primary hover:bg-primary/90"
@@ -219,16 +219,18 @@ const ProductDetail = () => {
                   <ShoppingCart className="h-5 w-5 mr-2" />
                   Add to Cart
                 </Button>
-                <Button variant="outline" size="lg">
-                  <Heart className="h-5 w-5" />
-                </Button>
-                <Button variant="outline" size="lg">
-                  <Share2 className="h-5 w-5" />
-                </Button>
+                <div className="flex space-x-3 sm:space-x-0 sm:space-y-0">
+                  <Button variant="outline" size="lg" className="flex-1 sm:flex-none">
+                    <Heart className="h-5 w-5" />
+                  </Button>
+                  <Button variant="outline" size="lg" className="flex-1 sm:flex-none">
+                    <Share2 className="h-5 w-5" />
+                  </Button>
+                </div>
               </div>
 
               {/* Features */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                 <div className="flex items-center space-x-2">
                   <Truck className="h-5 w-5 text-primary" />
                   <span>Free delivery over $50</span>
@@ -251,9 +253,9 @@ const ProductDetail = () => {
           <CardContent className="p-6">
             <Tabs defaultValue="description" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="description">Description</TabsTrigger>
-                <TabsTrigger value="nutrition">Nutrition Facts</TabsTrigger>
-                <TabsTrigger value="reviews">Reviews ({product.reviews})</TabsTrigger>
+                <TabsTrigger value="description" className="text-xs sm:text-sm">Description</TabsTrigger>
+                <TabsTrigger value="nutrition" className="text-xs sm:text-sm">Nutrition</TabsTrigger>
+                <TabsTrigger value="reviews" className="text-xs sm:text-sm">Reviews ({product.reviews})</TabsTrigger>
               </TabsList>
               
               <TabsContent value="description" className="mt-6">
@@ -271,7 +273,7 @@ const ProductDetail = () => {
               </TabsContent>
               
               <TabsContent value="nutrition" className="mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div>
                     <h4 className="text-lg font-semibold mb-4">Nutrition Facts (per 100g)</h4>
                     <div className="space-y-3">

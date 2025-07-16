@@ -80,47 +80,47 @@ const Profile = () => {
           <div className="mb-8">
             <Card>
               <CardContent className="p-6">
-                <div className="flex items-center space-x-4">
-                  <Avatar className="h-20 w-20">
-                    <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <h1 className="text-2xl font-bold text-gray-900">John Doe</h1>
-                    <p className="text-gray-600">john.doe@email.com</p>
-                    <Badge className="mt-2 bg-green-100 text-green-800">Premium Member</Badge>
-                  </div>
-                  <Button variant="outline" size="sm">
-                    <Edit3 className="h-4 w-4 mr-2" />
-                    Edit Profile
-                  </Button>
-                </div>
+                 <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                   <Avatar className="h-20 w-20">
+                     <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" />
+                     <AvatarFallback>JD</AvatarFallback>
+                   </Avatar>
+                   <div className="flex-1 text-center sm:text-left">
+                     <h1 className="text-2xl font-bold text-gray-900">John Doe</h1>
+                     <p className="text-gray-600">john.doe@email.com</p>
+                     <Badge className="mt-2 bg-green-100 text-green-800">Premium Member</Badge>
+                   </div>
+                   <Button variant="outline" size="sm" className="w-full sm:w-auto">
+                     <Edit3 className="h-4 w-4 mr-2" />
+                     Edit Profile
+                   </Button>
+                 </div>
               </CardContent>
             </Card>
           </div>
 
           {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-5">
-              <TabsTrigger value="profile" className="flex items-center space-x-2">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+              <TabsTrigger value="profile" className="flex items-center space-x-1 lg:space-x-2">
                 <User className="h-4 w-4" />
-                <span>Profile</span>
+                <span className="hidden sm:inline">Profile</span>
               </TabsTrigger>
-              <TabsTrigger value="orders" className="flex items-center space-x-2">
+              <TabsTrigger value="orders" className="flex items-center space-x-1 lg:space-x-2">
                 <Package className="h-4 w-4" />
-                <span>Orders</span>
+                <span className="hidden sm:inline">Orders</span>
               </TabsTrigger>
-              <TabsTrigger value="addresses" className="flex items-center space-x-2">
+              <TabsTrigger value="addresses" className="flex items-center space-x-1 lg:space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>Addresses</span>
+                <span className="hidden sm:inline lg:inline">Addresses</span>
               </TabsTrigger>
-              <TabsTrigger value="cards" className="flex items-center space-x-2">
+              <TabsTrigger value="cards" className="flex items-center space-x-1 lg:space-x-2">
                 <CreditCard className="h-4 w-4" />
-                <span>Cards</span>
+                <span className="hidden sm:inline">Cards</span>
               </TabsTrigger>
-              <TabsTrigger value="settings" className="flex items-center space-x-2">
+              <TabsTrigger value="settings" className="flex items-center space-x-1 lg:space-x-2">
                 <Settings className="h-4 w-4" />
-                <span>Settings</span>
+                <span className="hidden sm:inline">Settings</span>
               </TabsTrigger>
             </TabsList>
 

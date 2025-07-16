@@ -25,7 +25,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
       )}
       
       {/* Mobile Menu */}
-      <div className={`fixed top-0 left-0 h-full w-80 bg-white z-50 transform transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white z-50 transform transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-4">
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
