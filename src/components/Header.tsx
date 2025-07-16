@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import MobileMenu from './MobileMenu';
 import CartDrawer from './CartDrawer';
+import MegaMenu from './MegaMenu';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -103,20 +104,11 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Categories Navigation */}
-          <nav className="hidden md:flex items-center space-x-6 py-3 border-t">
-            {categories.map((category) => (
-              <Link
-                key={category}
-                to={`/products/${category.toLowerCase()}`}
-                className="text-gray-700 hover:text-primary transition-colors duration-200 text-sm font-medium"
-              >
-                {category}
-              </Link>
-            ))}
-          </nav>
         </div>
       </header>
+
+      {/* Mega Menu */}
+      <MegaMenu />
 
       {/* Mobile Menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />

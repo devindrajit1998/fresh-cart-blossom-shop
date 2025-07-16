@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Star, ShoppingCart, Eye, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import ProductModal from './ProductModal';
 
 const FeaturedProducts = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const products = [
     {
@@ -17,7 +19,9 @@ const FeaturedProducts = () => {
       reviews: 128,
       image: 'https://images.unsplash.com/photo-1543218024-57a70143c369?w=300&h=300&fit=crop',
       badge: 'Organic',
-      discount: 25
+      discount: 25,
+      description: 'Fresh, naturally ripened organic bananas packed with potassium and vitamins.',
+      inStock: true
     },
     {
       id: 2,
@@ -28,7 +32,9 @@ const FeaturedProducts = () => {
       reviews: 95,
       image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&h=300&fit=crop',
       badge: 'Fresh',
-      discount: 29
+      discount: 29,
+      description: 'Sweet, juicy strawberries perfect for snacking or desserts.',
+      inStock: true
     },
     {
       id: 3,
@@ -39,7 +45,9 @@ const FeaturedProducts = () => {
       reviews: 87,
       image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=300&h=300&fit=crop',
       badge: 'Bestseller',
-      discount: 22
+      discount: 22,
+      description: 'Nutritious whole grain bread made with premium ingredients.',
+      inStock: true
     },
     {
       id: 4,
@@ -50,7 +58,9 @@ const FeaturedProducts = () => {
       reviews: 156,
       image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&h=300&fit=crop',
       badge: 'Organic',
-      discount: 20
+      discount: 20,
+      description: 'Fresh organic milk from grass-fed cows, rich in calcium and protein.',
+      inStock: true
     },
     {
       id: 5,
@@ -61,7 +71,9 @@ const FeaturedProducts = () => {
       reviews: 73,
       image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=300&h=300&fit=crop',
       badge: 'Fresh',
-      discount: 29
+      discount: 29,
+      description: 'Crisp, nutrient-rich spinach leaves perfect for salads and cooking.',
+      inStock: true
     },
     {
       id: 6,
@@ -72,7 +84,9 @@ const FeaturedProducts = () => {
       reviews: 142,
       image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300&h=300&fit=crop',
       badge: 'Premium',
-      discount: 25
+      discount: 25,
+      description: 'Crisp, sweet premium apples handpicked for exceptional quality.',
+      inStock: true
     }
   ];
 
@@ -153,7 +167,11 @@ const FeaturedProducts = () => {
                     
                     {/* Hover Actions */}
                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-2">
-                      <Button size="sm" className="bg-white text-gray-900 hover:bg-gray-100">
+                      <Button 
+                        size="sm" 
+                        className="bg-white text-gray-900 hover:bg-gray-100"
+                        onClick={() => setSelectedProduct(product)}
+                      >
                         <Eye className="h-4 w-4 mr-1" />
                         View
                       </Button>
@@ -191,6 +209,14 @@ const FeaturedProducts = () => {
           </div>
         </div>
       </div>
+      
+      {/* Product Modal */}
+      {selectedProduct && (
+        <ProductModal 
+          product={selectedProduct} 
+          onClose={() => setSelectedProduct(null)} 
+        />
+      )}
     </div>
   );
 };

@@ -78,6 +78,22 @@ export default {
 				green: {
 					light: 'hsl(var(--light-green))',
 				},
+				purple: {
+					DEFAULT: 'hsl(var(--purple))',
+					light: 'hsl(var(--light-purple))',
+				},
+				blue: {
+					DEFAULT: 'hsl(var(--blue))',
+					light: 'hsl(var(--light-blue))',
+				},
+				pink: {
+					DEFAULT: 'hsl(var(--pink))',
+					light: 'hsl(var(--light-pink))',
+				},
+				yellow: {
+					DEFAULT: 'hsl(var(--yellow))',
+					light: 'hsl(var(--light-yellow))',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

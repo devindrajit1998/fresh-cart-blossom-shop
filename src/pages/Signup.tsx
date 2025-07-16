@@ -174,7 +174,7 @@ const Signup = () => {
                     id="agreeToTerms"
                     name="agreeToTerms"
                     checked={formData.agreeToTerms}
-                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, agreeToTerms: checked }))}
+                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, agreeToTerms: checked === true }))}
                     required
                   />
                   <label htmlFor="agreeToTerms" className="text-sm text-gray-600">
@@ -189,7 +189,7 @@ const Signup = () => {
                     id="subscribeNewsletter"
                     name="subscribeNewsletter"
                     checked={formData.subscribeNewsletter}
-                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, subscribeNewsletter: checked }))}
+                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, subscribeNewsletter: checked === true }))}
                   />
                   <label htmlFor="subscribeNewsletter" className="text-sm text-gray-600">
                     Subscribe to our newsletter for exclusive offers
