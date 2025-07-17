@@ -1,10 +1,12 @@
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, ShoppingCart, User, Menu, X, Heart, MapPin, Phone } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, Heart, MapPin, Phone, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { ThemeToggle } from './ThemeToggle';
 import MobileMenu from './MobileMenu';
 import CartDrawer from './CartDrawer';
 import MegaMenu from './MegaMenu';
@@ -26,7 +28,7 @@ const Header = () => {
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-primary text-white py-2 text-sm">
+      <div className="gradient-primary text-white py-2 text-sm">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 md:space-x-4 overflow-hidden">
@@ -47,7 +49,7 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <header className={`sticky top-0 z-50 bg-white border-b sticky-nav transition-all duration-300 ${isScrolled ? 'scrolled shadow-lg' : ''}`}>
+      <header className={`sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -71,13 +73,67 @@ const Header = () => {
 
             {/* Right Side Icons */}
             <div className="flex items-center space-x-2 md:space-x-4">
-              <Button variant="ghost" size="icon" className="hidden lg:flex">
+              <Button variant="ghost" size="icon" className="hidden lg:flex hover:bg-primary/10">
                 <Heart className="h-5 w-5" />
               </Button>
               
-              <Button variant="ghost" size="icon" className="hidden lg:flex">
-                <User className="h-5 w-5" />
-              </Button>
+              {/* Notifications */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="hidden lg:flex relative hover:bg-primary/10">
+                    <Bell className="h-5 w-5" />
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-orange">
+                      2
+                    </Badge>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-80">
+                  <div className="p-4 border-b">
+                    <h4 className="font-semibold">Notifications</h4>
+                  </div>
+                  <DropdownMenuItem className="p-4">
+                    <div>
+                      <p className="font-medium">Order Delivered</p>
+                      <p className="text-sm text-muted-foreground">Your fresh groceries have been delivered!</p>
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="p-4">
+                    <div>
+                      <p className="font-medium">Special Offer</p>
+                      <p className="text-sm text-muted-foreground">20% off on organic vegetables today!</p>
+                    </div>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Profile Menu */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="hidden lg:flex hover:bg-primary/10">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <Link to="/profile" className="w-full">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link to="/login" className="w-full">Orders</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link to="/login" className="w-full">Wishlist</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Link to="/login" className="w-full">Sign In</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Theme Toggle */}
+              <div className="hidden lg:flex">
+                <ThemeToggle />
+              </div>
 
               <Button 
                 variant="ghost" 

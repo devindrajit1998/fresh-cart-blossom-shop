@@ -42,6 +42,14 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
+    /* Modern gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-green)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--blue)) 50%, hsl(var(--purple)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+    --gradient-accent: linear-gradient(90deg, hsl(var(--orange)) 0%, hsl(var(--yellow)) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)/0.3) 100%);
+
     /* Modern trendy grocery theme colors */
     --primary-green: 142 76% 36%;
     --light-green: 142 30% 96%;
@@ -96,6 +104,39 @@ All colors MUST be HSL.
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    /* Dark mode colors */
+    --primary-green: 142 76% 36%;
+    --light-green: 142 76% 46%;
+    --dark-green: 142 76% 26%;
+    --orange: 24.6 95% 53.1%;
+    --light-orange: 24.6 95% 60%;
+    --purple: 262.1 83.3% 57.8%;
+    --light-purple: 262.1 83.3% 67.8%;
+    --blue: 221.2 83.2% 53.3%;
+    --light-blue: 221.2 83.2% 63.3%;
+    --pink: 328.3 85.5% 70.2%;
+    --light-pink: 328.3 85.5% 80.2%;
+    --yellow: 47.9 95.8% 53.1%;
+    --light-yellow: 47.9 95.8% 63.1%;
+    --gray-50: 210 40% 98%;
+    --gray-100: 210 40% 96%;
+    --gray-200: 214.3 31.8% 91.4%;
+    --gray-300: 212.7 26.8% 83.9%;
+    --gray-400: 215.4 16.3% 46.9%;
+    --gray-500: 215.4 16.3% 46.9%;
+    --gray-600: 215.4 16.3% 36.9%;
+    --gray-700: 215.4 16.3% 26.9%;
+    --gray-800: 217.2 32.6% 17.5%;
+    --gray-900: 222.2 84% 4.9%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-green)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--blue)) 50%, hsl(var(--purple)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+    --gradient-accent: linear-gradient(90deg, hsl(var(--orange)) 0%, hsl(var(--yellow)) 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted)/0.3) 100%);
   }
 }
 
@@ -202,29 +243,51 @@ All colors MUST be HSL.
   animation: shimmer 2s infinite;
 }
 
-/* Modern gradient backgrounds */
+/* Modern Gradient Classes */
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-hero {
+  background: var(--gradient-hero);
+}
+
+.gradient-card {
+  background: var(--gradient-card);
+}
+
+.gradient-accent {
+  background: var(--gradient-accent);
+}
+
+.gradient-glass {
+  background: var(--gradient-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-subtle {
+  background: var(--gradient-subtle);
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass-effect {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Legacy gradients for compatibility */
 .bg-gradient-primary {
-  background: linear-gradient(135deg, hsl(var(--primary-green)), hsl(var(--dark-green)));
+  background: var(--gradient-primary);
 }
 
-.bg-gradient-secondary {
-  background: linear-gradient(135deg, hsl(var(--light-green)), hsl(var(--primary-green)));
-}
-
-.bg-gradient-orange {
-  background: linear-gradient(135deg, hsl(var(--orange)), hsl(24 95% 48%));
-}
-
-.bg-gradient-purple {
-  background: linear-gradient(135deg, hsl(var(--purple)), hsl(262 83% 48%));
-}
-
-.bg-gradient-blue {
-  background: linear-gradient(135deg, hsl(var(--blue)), hsl(217 91% 50%));
-}
-
-.bg-gradient-pink {
-  background: linear-gradient(135deg, hsl(var(--pink)), hsl(330 81% 50%));
+.bg-gradient-hero {
+  background: var(--gradient-hero);
 }
 
 .bg-gradient-rainbow {

@@ -57,7 +57,7 @@ const HeroSlider = () => {
   };
 
   return (
-    <div className="relative h-96 md:h-[500px] overflow-hidden rounded-xl">
+    <div className="relative h-96 md:h-[500px] overflow-hidden rounded-xl shadow-2xl">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -71,18 +71,18 @@ const HeroSlider = () => {
               alt={slide.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
             
             <div className="absolute inset-0 flex items-center">
               <div className="container mx-auto px-4">
                 <div className="max-w-lg text-white animate-fadeIn">
-                  <div className="inline-block bg-orange px-3 py-1 rounded-full text-sm font-semibold mb-4">
+                  <div className="inline-block gradient-accent px-4 py-2 rounded-full text-sm font-semibold mb-4 text-white shadow-lg">
                     {slide.offer}
                   </div>
                   <h2 className="text-4xl md:text-5xl font-bold mb-2 font-playfair">
                     {slide.title}
                   </h2>
-                  <h3 className="text-xl md:text-2xl mb-4 text-orange">
+                  <h3 className="text-xl md:text-2xl mb-4 bg-gradient-to-r from-orange to-yellow bg-clip-text text-transparent font-semibold">
                     {slide.subtitle}
                   </h3>
                   <p className="text-lg mb-6 text-gray-200">
@@ -90,7 +90,7 @@ const HeroSlider = () => {
                   </p>
                   <Button 
                     size="lg" 
-                    className="bg-gradient-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full"
+                    className="gradient-primary hover:scale-105 text-white px-8 py-3 rounded-full shadow-xl transition-all duration-300"
                   >
                     {slide.cta}
                   </Button>
@@ -104,14 +104,14 @@ const HeroSlider = () => {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 transition-all duration-200"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 glass-effect hover:bg-white/30 rounded-full p-3 transition-all duration-200 hover:scale-110"
       >
         <ChevronLeft className="h-6 w-6 text-white" />
       </button>
       
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 transition-all duration-200"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 glass-effect hover:bg-white/30 rounded-full p-3 transition-all duration-200 hover:scale-110"
       >
         <ChevronRight className="h-6 w-6 text-white" />
       </button>

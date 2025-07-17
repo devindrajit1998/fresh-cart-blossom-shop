@@ -106,8 +106,8 @@ const FeaturedProducts = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2 font-playfair">Featured Products</h2>
-            <p className="text-gray-600">Handpicked favorites from our collection</p>
+            <h2 className="text-3xl font-bold text-foreground mb-2 font-playfair bg-gradient-to-r from-primary to-blue bg-clip-text text-transparent">Featured Products</h2>
+            <p className="text-muted-foreground">Handpicked favorites from our collection</p>
           </div>
           <div className="flex space-x-2">
             <Button
@@ -141,7 +141,7 @@ const FeaturedProducts = () => {
                 key={product.id}
                 className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/4 px-2"
               >
-                <div className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div className="group bg-card border rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden hover:scale-[1.02]">
                   <div className="relative overflow-hidden">
                     <img 
                       src={product.image} 
@@ -166,16 +166,16 @@ const FeaturedProducts = () => {
                     </div>
                     
                     {/* Hover Actions */}
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-2">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center space-x-2">
                       <Button 
                         size="sm" 
-                        className="bg-white text-gray-900 hover:bg-gray-100"
+                        className="glass-effect text-white hover:bg-white/20 backdrop-blur-md border-white/20"
                         onClick={() => setSelectedProduct(product)}
                       >
                         <Eye className="h-4 w-4 mr-1" />
                         View
                       </Button>
-                      <Button size="sm" className="bg-primary text-white hover:bg-primary/90">
+                      <Button size="sm" className="gradient-primary text-white hover:scale-105 transition-transform">
                         <ShoppingCart className="h-4 w-4 mr-1" />
                         Add
                       </Button>
@@ -183,7 +183,7 @@ const FeaturedProducts = () => {
                   </div>
                   
                   <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1">{product.name}</h3>
+                    <h3 className="font-semibold text-foreground mb-2 line-clamp-1">{product.name}</h3>
                     
                     <div className="flex items-center mb-2">
                       <div className="flex items-center">
