@@ -23,10 +23,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const categories = [
-    'Vegetables', 'Fruits', 'Dairy', 'Bakery', 'Meat', 'Snacks', 'Beverages', 'Organic'
-  ];
-
   return (
     <>
       {/* Top Bar */}
@@ -55,11 +51,11 @@ const Header = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
               <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-xl">G</span>
               </div>
-              <span className="text-2xl font-bold text-gray-900 font-playfair">GroceryHub</span>
+              <span className="text-xl md:text-2xl font-bold text-gray-900 font-playfair">GroceryHub</span>
             </Link>
 
             {/* Search Bar - Desktop */}
@@ -105,12 +101,13 @@ const Header = () => {
               </Button>
             </div>
           </div>
-
         </div>
       </header>
 
-      {/* Mega Menu */}
-      <MegaMenu />
+      {/* Mega Menu - Hidden on mobile */}
+      <div className="hidden md:block">
+        <MegaMenu />
+      </div>
 
       {/* Mobile Menu */}
       <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />

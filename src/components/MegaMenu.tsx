@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Truck, Shield, CreditCard, Clock, Star, Gift, Leaf, Apple, Milk, Cookie, Beef, Coffee, Utensils } from 'lucide-react';
@@ -124,8 +125,8 @@ const MegaMenu = () => {
               </button>
               
               {openMenu === 'categories' && (
-                <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 w-[800px] z-50 animate-fade-in">
-                  <div className="grid grid-cols-2 gap-8">
+                <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 w-[800px] max-w-[90vw] z-50 animate-fade-in">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {megaMenuData.categories.items.map((category, index) => (
                       <div key={index} className="group">
                         <div className="flex items-center space-x-3 mb-4">
@@ -167,7 +168,7 @@ const MegaMenu = () => {
               </button>
               
               {openMenu === 'deals' && (
-                <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 w-[400px] z-50 animate-fade-in">
+                <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 w-[400px] max-w-[90vw] z-50 animate-fade-in">
                   <div className="space-y-4">
                     {megaMenuData.deals.items.map((deal, index) => (
                       <Link
@@ -201,7 +202,7 @@ const MegaMenu = () => {
               </button>
               
               {openMenu === 'services' && (
-                <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 w-[400px] z-50 animate-fade-in">
+                <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 w-[400px] max-w-[90vw] z-50 animate-fade-in">
                   <div className="space-y-4">
                     {megaMenuData.services.items.map((service, index) => (
                       <Link
