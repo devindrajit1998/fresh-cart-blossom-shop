@@ -54,10 +54,7 @@ const Header = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
-              <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-xl">G</span>
-              </div>
-              <span className="text-xl md:text-2xl font-bold text-gray-900 font-playfair">GroceryHub</span>
+              <img src="logo.png" alt="GroceryHub" className='w-[150px]' />
             </Link>
 
             {/* Search Bar - Desktop */}

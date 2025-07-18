@@ -84,10 +84,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
           {/* Header */}
           <div className="flex justify-between items-center p-4 border-b border-gray-100">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
-                <span className="text-white font-bold">G</span>
-              </div>
-              <span className="text-xl font-bold text-gray-900 font-playfair">GroceryHub</span>
+            <img src="logo.png" alt="GroceryHub" className='w-[150px]' />
             </div>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-5 w-5" />
