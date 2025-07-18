@@ -16,7 +16,7 @@ import Deals from "./pages/Deals";
 import NotFound from "./pages/NotFound";
 import { useSelector, useDispatch } from "react-redux";
 import { initializeAuth } from "@/utils/slices/AuthSlice";
-import { fetchProfile } from "./utils/slices/profileSlice";
+import { fetchProfile } from "./utils/slices/ProfileSlice";
 
 const queryClient = new QueryClient();
 

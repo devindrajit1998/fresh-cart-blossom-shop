@@ -81,21 +81,19 @@ export const logoutUser = async () => {
 export const uploadProfileImage = async (file, user_id) => {
   const access_token = sessionStorage.getItem("session_token");
   if (!access_token) throw new Error("No access token available");
-  const SUPABASE_BUCKET_URL = `${SUPABASE_URL}/storage/v1/s3`;
-  const filePath = `avatars/${user_id}_${Date.now()}_${file.name}`;
+  const filePath = `${user_id}/${Date.now()}_${file.name}`;
   const formData = new FormData();
   formData.append("file", file);
   await axios.post(
-    `${SUPABASE_BUCKET_URL}/upload/${filePath}`,
+    `${SUPABASE_URL}/storage/v1/object/avatars/${filePath}`,
     formData,
     {
       headers: {
         apikey: SUPABASE_ANON_KEY,
         Authorization: `Bearer ${access_token}`,
-        "Content-Type": "multipart/form-data",
       },
     }
   );
   // Return the public URL for the image
-  return `${SUPABASE_BUCKET_URL}/${filePath}`;
+  return `${SUPABASE_URL}/storage/v1/object/public/avatars/${filePath}`;
 };
