@@ -22,7 +22,7 @@ export const updateProfile = async (user_id, profileData) => {
   const access_token = sessionStorage.getItem("session_token");
   if (!access_token) throw new Error("No access token available");
   const response = await axios.patch(
-    `${SUPABASE_URL}/rest/v1/profiles?user_id=eq.${user_id}`,
+    `${SUPABASE_URL}/rest/v1/profiles?id=eq.${user_id}`,
     profileData,
     {
       headers: {
