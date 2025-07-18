@@ -122,9 +122,6 @@ const App = () => {
   if (!authInitialized) {
     return <Loader />;
   }
-  if (authInitialized) {
-    dispatch(fetchProfile());
-  }
 
   return (
     <QueryClientProvider client={queryClient}>
