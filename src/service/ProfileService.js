@@ -7,7 +7,7 @@ export const getProfile = async (user_id) => {
   const access_token = sessionStorage.getItem("session_token");
   if (!access_token) throw new Error("No access token available");
   const response = await axios.get(
-    `${SUPABASE_URL}/rest/v1/profiles?user_id=eq.${user_id}`,
+    `${SUPABASE_URL}/rest/v1/profiles?id=eq.${user_id}`,
     {
       headers: {
         apikey: SUPABASE_ANON_KEY,
@@ -41,7 +41,7 @@ export const updateProfileData = async (user_id, data) => {
   if (!access_token) throw new Error("No access token available");
   const { email, ...rest } = data;
   const response = await axios.patch(
-    `${SUPABASE_URL}/rest/v1/profiles?user_id=eq.${user_id}`,
+    `${SUPABASE_URL}/rest/v1/profiles?id=eq.${user_id}`,
     rest,
     {
       headers: {
@@ -94,6 +94,5 @@ export const uploadProfileImage = async (file, user_id) => {
       },
     }
   );
-  // Return the public URL for the image
   return `${SUPABASE_URL}/storage/v1/object/public/avatars/${filePath}`;
 };

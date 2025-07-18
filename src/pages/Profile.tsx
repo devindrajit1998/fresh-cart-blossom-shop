@@ -53,7 +53,7 @@ const Profile = () => {
     avatar_url: "",
   });
 
-  // Fetch profile on mount or when user_id changes
+  
   useEffect(() => {
     if (user_id) {
       dispatch(fetchProfile(user_id));
