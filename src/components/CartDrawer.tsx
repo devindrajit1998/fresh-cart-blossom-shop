@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import { X, Plus, Minus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -117,9 +118,11 @@ const CartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
                 <span className="text-primary">${total.toFixed(2)}</span>
               </div>
             </div>
-            <Button className="w-full bg-gradient-primary hover:bg-primary/90">
-              Proceed to Checkout
-            </Button>
+            <Link to="/cart" className="block">
+              <Button className="w-full bg-gradient-primary hover:bg-primary/90">
+                View Cart
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

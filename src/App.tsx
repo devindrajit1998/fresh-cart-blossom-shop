@@ -13,6 +13,10 @@ import Profile from "./pages/Profile";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Deals from "./pages/Deals";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
+import OrderConfirmation from "./pages/OrderConfirmation";
 import NotFound from "./pages/NotFound";
 import { useSelector, useDispatch } from "react-redux";
 import { initializeAuth } from "@/utils/slices/AuthSlice";
@@ -162,6 +166,10 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/deals" element={<Deals />} />
             <Route path="/deals/:type" element={<Deals />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/order-confirmation" element={<OrderConfirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

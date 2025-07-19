@@ -23,7 +23,7 @@ const Login = () => {
   });
 
   const dispatch = useDispatch();
-  const isLoading = useSelector((state)=>state.auth.loading);
+  const isLoading = useSelector((state: any)=>state.auth.loading);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
