@@ -10,15 +10,18 @@ import NewsletterSection from '@/components/NewsletterSection';
 import Footer from '@/components/Footer';
 import FloatingChatButton from '@/components/FloatingChatButton';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getCategories } from '@/utils/slices/GeneralSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategories, getFeaturedProducts } from '@/utils/slices/GeneralSlice';
 
 const Index = () => {
   const dispatch = useDispatch();
  
   useEffect(() => {
     dispatch(getCategories());
+    dispatch(getFeaturedProducts());
   }, [dispatch]);
+
+  const featuredProducts = useSelector((state)=>state.general.featuredProducts);
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -34,7 +37,7 @@ const Index = () => {
 
         {/* Featured Products */}
         <section className="container mx-auto px-4">
-          <FeaturedProducts />
+          <FeaturedProducts title="Featured" sub_title="Handpicked favorites from our collection" data={featuredProducts}/>
         </section>
 
         {/* Offer Zone */}

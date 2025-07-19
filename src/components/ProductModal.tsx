@@ -28,25 +28,29 @@ const ProductModal = ({ product, onClose }) => {
             {/* Product Image */}
             <div className="relative">
               <img 
-                src={product.image} 
+                src={product.image_url} 
                 alt={product.name}
                 className="w-full h-64 object-cover rounded-lg"
               />
               <div className="absolute top-3 left-3">
-                <Badge 
-                  className={`${
-                    product.badge === 'Organic' ? 'bg-green-light text-primary' :
-                    product.badge === 'Fresh' ? 'bg-orange-light text-orange' :
-                    'bg-gray-100 text-gray-800'
-                  }`}
-                >
-                  {product.badge}
-                </Badge>
+                {product.badge && (
+                  <Badge 
+                    className={`${
+                      product.badge === 'Organic' ? 'bg-green-light text-primary' :
+                      product.badge === 'Fresh' ? 'bg-orange-light text-orange' :
+                      'bg-gray-100 text-gray-800'
+                    }`}
+                  >
+                    {product.badge}
+                  </Badge>
+                )}
               </div>
               <div className="absolute top-3 right-3">
-                <Badge className="bg-red-500 text-white">
-                  -{product.discount}%
-                </Badge>
+                {product.discount_percentage && (
+                  <Badge className="bg-red-500 text-white">
+                    -{product.discount_percentage}%
+                  </Badge>
+                )}
               </div>
             </div>
 
@@ -68,18 +72,22 @@ const ProductModal = ({ product, onClose }) => {
 
               {/* Price */}
               <div className="flex items-center space-x-3">
-                <span className="text-3xl font-bold text-primary">${product.price}</span>
-                <span className="text-xl text-gray-500 line-through">${product.originalPrice}</span>
-                <Badge className="bg-green-100 text-green-800">
-                  Save ${(product.originalPrice - product.price).toFixed(2)}
-                </Badge>
+                <span className="text-3xl font-bold text-primary">₹{product.price}</span>
+                {product.discount_percentage && (
+                  <span className="text-xl text-gray-500 line-through">₹{Math.round(product.price / (1 - product.discount_percentage / 100))}</span>
+                )}
+                {product.discount_percentage && (
+                  <Badge className="bg-green-100 text-green-800">
+                    Save {product.discount_percentage}%
+                  </Badge>
+                )}
               </div>
 
               {/* Stock Status */}
               <div className="flex items-center space-x-2">
-                <div className={`w-2 h-2 rounded-full ${product.inStock ? 'bg-green-500' : 'bg-red-500'}`} />
-                <span className={`text-sm ${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
-                  {product.inStock ? 'In Stock' : 'Out of Stock'}
+                <div className={`w-2 h-2 rounded-full ${product.in_stock ? 'bg-green-500' : 'bg-red-500'}`} />
+                <span className={`text-sm ${product.in_stock ? 'text-green-600' : 'text-red-600'}`}>
+                  {product.in_stock ? 'In Stock' : 'Out of Stock'}
                 </span>
               </div>
 
@@ -110,7 +118,7 @@ const ProductModal = ({ product, onClose }) => {
               <div className="flex space-x-3">
                 <Button 
                   className="flex-1 bg-gradient-primary hover:bg-primary/90"
-                  disabled={!product.inStock}
+                  disabled={!product.in_stock}
                 >
                   <ShoppingCart className="h-5 w-5 mr-2" />
                   Add to Cart
