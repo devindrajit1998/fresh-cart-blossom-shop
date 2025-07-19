@@ -1,23 +1,23 @@
 
-import { useState } from 'react';
+import { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useSelector } from 'react-redux';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const CategorySlider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const categoryData = useSelector((state)=>state.general.categories);
- 
-  const itemsPerPage = 6;
-  const maxIndex = Math.max(0, categoryData?.length - itemsPerPage);
+  const swiperRef = useRef(null);
+  const categoryData = useSelector((state: any)=>state.general.categories);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+    swiperRef.current?.slideNext();
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    swiperRef.current?.slidePrev();
   };
 
   return (
@@ -33,7 +33,6 @@ const CategorySlider = () => {
               variant="outline"
               size="icon"
               onClick={prevSlide}
-              disabled={currentIndex === 0}
               className="rounded-full"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -42,7 +41,6 @@ const CategorySlider = () => {
               variant="outline"
               size="icon"
               onClick={nextSlide}
-              disabled={currentIndex === maxIndex}
               className="rounded-full"
             >
               <ChevronRight className="h-4 w-4" />
@@ -50,35 +48,43 @@ const CategorySlider = () => {
           </div>
         </div>
 
-        <div className="overflow-hidden">
-          <div 
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }}
-          >
-            {categoryData?.map((category) => (
-              <div
-                key={category.id}
-                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/6 px-2"
-              >
-                <div className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded-2xl bg-white p-4 shadow-sm hover:shadow-lg transition-all duration-300 hover-scale">
-                    <div className="aspect-square overflow-hidden rounded-xl mb-4">
-                      <img 
-                        src={category.image_url} 
-                        alt={category.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="text-center">
-                      <h3 className="font-semibold text-gray-900 mb-1">{category.name}</h3>
-                      <p className="text-sm text-gray-500">{category.itemCount}</p>
-                    </div>
+        <Swiper
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          spaceBetween={16}
+          slidesPerView={2}
+          breakpoints={{
+            640: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 6,
+            },
+          }}
+          modules={[Navigation]}
+          className="category-swiper"
+        >
+          {categoryData?.map((category) => (
+            <SwiperSlide key={category.id}>
+              <div className="group cursor-pointer">
+                <div className="relative overflow-hidden rounded-2xl bg-white p-4 shadow-sm hover:shadow-lg transition-all duration-300 hover-scale">
+                  <div className="aspect-square overflow-hidden rounded-xl mb-4">
+                    <img 
+                      src={category.image_url} 
+                      alt={category.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <h3 className="font-semibold text-gray-900 mb-1">{category.name}</h3>
+                    <p className="text-sm text-gray-500">{category.itemCount}</p>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

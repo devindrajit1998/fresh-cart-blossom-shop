@@ -393,6 +393,36 @@ All colors MUST be HSL.
   }
 }
 
+/* Swiper custom styles */
+.hero-swiper .swiper-pagination {
+  bottom: 16px !important;
+}
+
+.hero-swiper .swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  background-color: white !important;
+}
+
+.testimonials-swiper .swiper-pagination {
+  position: relative !important;
+  margin-top: 24px !important;
+}
+
+.testimonials-swiper .swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background-color: hsl(var(--muted)) !important;
+}
+
+.testimonials-swiper .swiper-pagination-bullet-active {
+  background-color: hsl(var(--primary)) !important;
+}
+
 /* From Uiverse.io by Nawsome */
 .pl {
   width: 6em;

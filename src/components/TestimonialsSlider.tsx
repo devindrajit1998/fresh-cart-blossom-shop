@@ -1,10 +1,15 @@
 
-import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const TestimonialsSlider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const swiperRef = useRef(null);
 
   const testimonials = [
     {
@@ -41,20 +46,12 @@ const TestimonialsSlider = () => {
     }
   ];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [testimonials.length]);
-
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    swiperRef.current?.slideNext();
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    swiperRef.current?.slidePrev();
   };
 
   return (
@@ -66,13 +63,28 @@ const TestimonialsSlider = () => {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="overflow-hidden">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+          <Swiper
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            spaceBetween={16}
+            slidesPerView={1}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+              renderBullet: (index, className) => {
+                return `<span class="${className} !w-3 !h-3 !bg-gray-300 swiper-pagination-bullet-active:!bg-primary"></span>`;
+              },
+            }}
+            modules={[Navigation, Pagination, Autoplay]}
+            className="testimonials-swiper"
+          >
+            {testimonials.map((testimonial) => (
+              <SwiperSlide key={testimonial.id}>
+                <div className="px-4">
                   <div className="bg-white rounded-2xl shadow-sm p-8 text-center">
                     <img 
                       src={testimonial.image} 
@@ -89,15 +101,15 @@ const TestimonialsSlider = () => {
                     <p className="text-sm text-gray-500">{testimonial.role}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
           <Button
             variant="outline"
             size="icon"
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 rounded-full bg-white shadow-lg"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 rounded-full bg-white shadow-lg z-10"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -106,22 +118,10 @@ const TestimonialsSlider = () => {
             variant="outline"
             size="icon"
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 rounded-full bg-white shadow-lg"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 rounded-full bg-white shadow-lg z-10"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
-        </div>
-
-        <div className="flex justify-center mt-6 space-x-2">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                index === currentIndex ? 'bg-primary' : 'bg-gray-300'
-              }`}
-            />
-          ))}
         </div>
       </div>
     </div>
