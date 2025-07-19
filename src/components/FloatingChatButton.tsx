@@ -16,7 +16,7 @@ const FloatingChatButton = () => {
       </Button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-80 h-96 bg-white rounded-lg shadow-xl z-40 animate-scaleIn">
+        <div className="fixed bottom-24 right-6 w-80 h-96 bg-white rounded-lg shadow-xl z-40 animate-scaleIn pb-2">
           <div className="p-4 border-b bg-gradient-primary text-white rounded-t-lg">
             <h3 className="font-semibold">Chat Support</h3>
             <p className="text-sm text-white/90">We're here to help!</p>
@@ -34,7 +34,7 @@ const FloatingChatButton = () => {
               </div>
             </div>
           </div>
-          <div className="p-4 border-t">
+          <div className="p-4 border-t pt-1">
             <div className="flex space-x-2">
               <input 
                 type="text" 

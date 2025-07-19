@@ -11,9 +11,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleUserSignUp } from "../utils/slices/AuthSlice";
-
 
 
 const Signup = () => {
@@ -31,6 +30,7 @@ const Signup = () => {
   });
 
   const dispatch = useDispatch();
+  const isLoading = useSelector((state: any) => state.auth.loading);
 
 
   const handleInputChange = (e) => {
@@ -261,12 +261,13 @@ const Signup = () => {
                 </div>
               </div>
 
-              {/* Signup Button */}
+              {/* Sign Up Button */}
               <Button
                 type="submit"
                 className="w-full bg-gradient-primary hover:bg-primary/90"
+                disabled={isLoading}
               >
-                Create Account
+                {isLoading ? "Please wait..." : "Sign Up"}
               </Button>
 
               {/* Social Login */}

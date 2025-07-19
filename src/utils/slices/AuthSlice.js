@@ -73,6 +73,11 @@ export const AuthSlice = createSlice({
       .addCase(handleUserSignUp.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Signup failed";
+        toast({
+          title: "Signup Error",
+          description: typeof action.payload === 'string' ? action.payload : (action.payload?.message || "Signup failed"),
+          variant: "destructive",
+        });
       })
       .addCase(handleUserLogin.pending, (state) => {
         state.loading = true;

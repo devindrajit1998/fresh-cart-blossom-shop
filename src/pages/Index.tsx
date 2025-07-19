@@ -9,8 +9,16 @@ import TestimonialsSlider from '@/components/TestimonialsSlider';
 import NewsletterSection from '@/components/NewsletterSection';
 import Footer from '@/components/Footer';
 import FloatingChatButton from '@/components/FloatingChatButton';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCategories } from '@/utils/slices/GeneralSlice';
 
 const Index = () => {
+  const dispatch = useDispatch();
+ 
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
   return (
     <div className="min-h-screen bg-background">
       <Header />

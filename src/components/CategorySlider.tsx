@@ -2,63 +2,15 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useSelector } from 'react-redux';
 
 const CategorySlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const categories = [
-    {
-      id: 1,
-      name: 'Vegetables',
-      image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200&h=200&fit=crop',
-      itemCount: '150+ items'
-    },
-    {
-      id: 2,
-      name: 'Fruits',
-      image: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=200&h=200&fit=crop',
-      itemCount: '200+ items'
-    },
-    {
-      id: 3,
-      name: 'Dairy',
-      image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop',
-      itemCount: '80+ items'
-    },
-    {
-      id: 4,
-      name: 'Bakery',
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop',
-      itemCount: '120+ items'
-    },
-    {
-      id: 5,
-      name: 'Meat',
-      image: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=200&h=200&fit=crop',
-      itemCount: '90+ items'
-    },
-    {
-      id: 6,
-      name: 'Snacks',
-      image: 'https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=200&h=200&fit=crop',
-      itemCount: '300+ items'
-    },
-    {
-      id: 7,
-      name: 'Beverages',
-      image: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=200&h=200&fit=crop',
-      itemCount: '180+ items'
-    },
-    {
-      id: 8,
-      name: 'Organic',
-      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=200&h=200&fit=crop',
-      itemCount: '250+ items'
-    }
-  ];
-
+  const categoryData = useSelector((state)=>state.general.categories);
+ 
   const itemsPerPage = 6;
-  const maxIndex = Math.max(0, categories.length - itemsPerPage);
+  const maxIndex = Math.max(0, categoryData?.length - itemsPerPage);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
@@ -103,7 +55,7 @@ const CategorySlider = () => {
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }}
           >
-            {categories.map((category) => (
+            {categoryData?.map((category) => (
               <div
                 key={category.id}
                 className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/6 px-2"
@@ -112,7 +64,7 @@ const CategorySlider = () => {
                   <div className="relative overflow-hidden rounded-2xl bg-white p-4 shadow-sm hover:shadow-lg transition-all duration-300 hover-scale">
                     <div className="aspect-square overflow-hidden rounded-xl mb-4">
                       <img 
-                        src={category.image} 
+                        src={category.image_url} 
                         alt={category.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />

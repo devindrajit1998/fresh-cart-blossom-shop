@@ -41,6 +41,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const user_id = useSelector((state: AppState) => state.auth.user?.id);
   const profileState = useSelector((state: AppState) => state.profile);
+  const updateSuccess = profileState.updateSuccess;
   const [activeTab, setActiveTab] = useState("profile");
   const [editMode, setEditMode] = useState(false);
   const [profile, setProfile] = useState({
@@ -79,9 +80,23 @@ const Profile = () => {
   const handleSave = (e) => {
     e.preventDefault();
     if (user_id) {
-      dispatch(updateFullProfile({ user_id, data: profile }));
+      const cleanProfile = {
+        ...profile,
+        date_of_birth: profile.date_of_birth === "" ? null : profile.date_of_birth,
+      };
+      console.log('Updating profile with:', cleanProfile);
+      dispatch(updateFullProfile({ user_id, data: cleanProfile }));
     }
   };
+
+  useEffect(() => {
+    if (updateSuccess) {
+      console.log('Profile updated successfully:', profileState.profile);
+    }
+    if (profileState.error) {
+      console.error('Profile update error:', profileState.error);
+    }
+  }, [updateSuccess, profileState.profile, profileState.error]);
 
   // Handle Logout
   const handleLogout = async () => {
@@ -91,7 +106,6 @@ const Profile = () => {
 
   // Show loading or success
   const loading = profileState.loading;
-  const updateSuccess = profileState.updateSuccess;
 
   const orderHistory = [
     {
@@ -161,7 +175,7 @@ const Profile = () => {
               <CardContent className="p-6">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
                   <Avatar className="h-20 w-20">
-                    <AvatarImage src={profile.avatar_url || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"} />
+                    <AvatarImage src={profile.avatar_url} />
                     <AvatarFallback>{profile.first_name?.[0]}{profile.last_name?.[0]}</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 text-center sm:text-left">
