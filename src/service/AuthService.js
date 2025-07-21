@@ -97,3 +97,8 @@ export const getUserProfile = async () => {
   );
   return response.data;
 };
+
+export const signInWithGoogle = () => {
+  const redirectTo = window.location.origin + "/"; // or your desired redirect URL
+  window.location.href = `${SUPABASE_URL}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(redirectTo)}&apikey=${SUPABASE_ANON_KEY}`;
+};

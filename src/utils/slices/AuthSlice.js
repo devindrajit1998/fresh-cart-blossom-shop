@@ -8,7 +8,7 @@ const initialState = {
   session_token: null,
   refresh_token: null,
   error: null,
-  authInitialized: false, // <-- add this
+  authInitialized: false, 
 };
 
 export const handleUserSignUp = createAsyncThunk(
@@ -28,7 +28,6 @@ export const handleUserLogin = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await userLogin({ email, password });
-      // Fetch user profile after login
       const user = await getUserProfile();
       return { ...response, user };
     } catch (error) {

@@ -1,74 +1,50 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Minus, Plus, Trash2, ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Minus, Plus, Trash2, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
-  // Mock cart items
-  const cartItems = [
-    {
-      id: 1,
-      name: 'Fresh Organic Bananas',
-      price: 2.99,
-      quantity: 2,
-      image: 'https://images.unsplash.com/photo-1543218024-57a70143c369?w=200&h=200&fit=crop',
-      unit: 'per lb',
-      category: 'Fruits'
-    },
-    {
-      id: 2,
-      name: 'Whole Milk',
-      price: 3.49,
-      quantity: 1,
-      image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200&h=200&fit=crop',
-      unit: 'per gallon',
-      category: 'Dairy'
-    },
-    {
-      id: 3,
-      name: 'Organic Spinach',
-      price: 4.99,
-      quantity: 1,
-      image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=200&h=200&fit=crop',
-      unit: 'per bunch',
-      category: 'Vegetables'
-    },
-    {
-      id: 4,
-      name: 'Premium Ribeye Steak',
-      price: 24.99,
-      quantity: 1,
-      image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=200&fit=crop',
-      unit: 'per lb',
-      category: 'Meat'
-    }
-  ];
+  const cartItems = useSelector((state: any) => state.cart.cartItems);
 
-  const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-  const tax = subtotal * 0.08;
+  console.log(cartItems);
+
+  const subtotal = cartItems.reduce(
+    (total, item) =>
+      total +
+      (item.price - item.price * item.discount_percentage * 0.01) *
+        item.quantity,
+    0
+  );
+  const tax = subtotal * 0.18;
   const shipping = subtotal > 50 ? 0 : 4.99;
   const total = subtotal + tax + shipping;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="flex items-center text-muted-foreground hover:text-primary transition-colors">
+            <Link
+              to="/"
+              className="flex items-center text-muted-foreground hover:text-primary transition-colors"
+            >
               <ArrowLeft className="h-5 w-5 mr-2" />
               Continue Shopping
             </Link>
           </div>
           <div>
             <h1 className="text-3xl font-bold gradient-text">Shopping Cart</h1>
-            <p className="text-muted-foreground">{cartItems.length} items in your cart</p>
+            <p className="text-muted-foreground">
+              {cartItems.length} items in your cart
+            </p>
           </div>
         </div>
 
@@ -79,35 +55,71 @@ const Cart = () => {
               <CardContent className="p-6">
                 <div className="space-y-6">
                   {cartItems.map((item, index) => (
-                    <div key={item.id} className={`flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-primary/5 to-secondary/5 border ${index !== cartItems.length - 1 ? 'border-b-0' : ''}`}>
-                      <img 
-                        src={item.image} 
+                    <div
+                      key={item.id}
+                      className={`flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-primary/5 to-secondary/5 border ${
+                        index !== cartItems.length - 1 ? "border-b-0" : ""
+                      }`}
+                    >
+                      <img
+                        src={item.image_url}
                         alt={item.name}
                         className="w-20 h-20 object-cover rounded-lg shadow-md"
                       />
                       <div className="flex-1">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h3 className="font-semibold text-lg">{item.name}</h3>
-                            <p className="text-muted-foreground text-sm">{item.unit} • {item.category}</p>
-                            <Badge variant="secondary" className="mt-1">${item.price}</Badge>
+                            <h3 className="font-semibold text-lg">
+                              {item.name}
+                            </h3>
+                            <p className="text-muted-foreground text-sm">
+                              {item.weight + " " + item.unit}
+                            </p>
+                            <Badge variant="secondary" className="mt-1">
+                              ₹
+                              {item.price -
+                                item.price * item.discount_percentage * 0.01}
+                            </Badge>
                           </div>
-                          <Button size="sm" variant="ghost" className="text-destructive hover:text-destructive/80">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="text-destructive hover:text-destructive/80"
+                          >
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                         <div className="flex items-center justify-between mt-4">
                           <div className="flex items-center space-x-3">
-                            <Button size="sm" variant="outline" className="h-8 w-8 p-0 rounded-full">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 w-8 p-0 rounded-full"
+                            >
                               <Minus className="h-4 w-4" />
                             </Button>
-                            <span className="font-medium text-lg w-8 text-center">{item.quantity}</span>
-                            <Button size="sm" variant="outline" className="h-8 w-8 p-0 rounded-full">
+                            <span className="font-medium text-lg w-8 text-center">
+                              {item.quantity}
+                            </span>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="h-8 w-8 p-0 rounded-full"
+                            >
                               <Plus className="h-4 w-4" />
                             </Button>
                           </div>
                           <div className="text-right">
-                            <p className="font-bold text-lg gradient-text">${(item.price * item.quantity).toFixed(2)}</p>
+                            <p className="font-bold text-lg gradient-text">
+                              ₹
+                              {(
+                                (item.price -
+                                  item.price *
+                                    item.discount_percentage *
+                                    0.01) *
+                                item.quantity
+                              ).toFixed(2)}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -123,22 +135,33 @@ const Cart = () => {
             <div className="sticky top-24">
               <Card className="shadow-xl border-0 bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm">
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-bold mb-6 gradient-text">Order Summary</h2>
-                  
+                  <h2 className="text-xl font-bold mb-6 gradient-text">
+                    Order Summary
+                  </h2>
+
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Subtotal ({cartItems.length} items)</span>
-                      <span className="font-medium">${subtotal.toFixed(2)}</span>
+                      <span className="text-muted-foreground">
+                        Subtotal ({cartItems.length} items)
+                      </span>
+                      <span className="font-medium">
+                        ₹{subtotal.toFixed(2)}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Tax</span>
-                      <span className="font-medium">${tax.toFixed(2)}</span>
+                      <span className="font-medium">₹{tax.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Shipping</span>
                       <span className="font-medium">
                         {shipping === 0 ? (
-                          <Badge variant="secondary" className="bg-green-100 text-green-800">Free</Badge>
+                          <Badge
+                            variant="secondary"
+                            className="bg-green-100 text-green-800"
+                          >
+                            Free
+                          </Badge>
                         ) : (
                           `$${shipping.toFixed(2)}`
                         )}
@@ -146,13 +169,13 @@ const Cart = () => {
                     </div>
                     {shipping > 0 && (
                       <p className="text-xs text-muted-foreground">
-                        Add ${(50 - subtotal).toFixed(2)} more for free shipping
+                        Add ₹{(50 - subtotal).toFixed(2)} more for free shipping
                       </p>
                     )}
                     <hr className="border-border" />
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total</span>
-                      <span className="gradient-text">${total.toFixed(2)}</span>
+                      <span className="gradient-text">₹{total.toFixed(2)}</span>
                     </div>
                   </div>
 

@@ -52,7 +52,9 @@ export const getProductById = createAsyncThunk(
 export const GeneralSlice = createSlice({
   name: "general",
   initialState,
-  reducers: {},
+  reducers: {
+ 
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCategories.pending, (state) => {
@@ -93,7 +95,7 @@ export const GeneralSlice = createSlice({
       .addCase(getProductById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to fetch product";
-      })
+      });
   },
 });
 
