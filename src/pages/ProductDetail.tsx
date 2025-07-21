@@ -20,7 +20,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductById } from "@/utils/slices/generalSlice";
+import { getProductById } from "@/utils/slices/GeneralSlice";
+import { AppState } from "@/types";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -33,7 +34,7 @@ const ProductDetail = () => {
     dispatch(getProductById(id));
   }, [id]);
 
-  const flatProduct = useSelector((state) => state.general.product);
+  const flatProduct = useSelector((state: AppState) => state.general.product);
   const product = flatProduct?.[0];
 
   const handleQuantityChange = (delta) => {

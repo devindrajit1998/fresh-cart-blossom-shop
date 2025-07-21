@@ -51,9 +51,17 @@ export const getProductById = createAsyncThunk(
 
 export const GeneralSlice = createSlice({
   name: "general",
-  initialState,
+  initialState: {
+    ...initialState,
+    selectedProduct: null,
+  },
   reducers: {
- 
+    openProductModal: (state, action) => {
+      state.selectedProduct = action.payload;
+    },
+    closeProductModal: (state) => {
+      state.selectedProduct = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -99,4 +107,5 @@ export const GeneralSlice = createSlice({
   },
 });
 
+export const { openProductModal, closeProductModal } = GeneralSlice.actions;
 export default GeneralSlice.reducer;

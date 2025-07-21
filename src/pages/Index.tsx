@@ -12,6 +12,7 @@ import FloatingChatButton from '@/components/FloatingChatButton';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories, getFeaturedProducts } from '@/utils/slices/GeneralSlice';
+import { AppState } from '@/types';
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Index = () => {
     dispatch(getFeaturedProducts());
   }, [dispatch]);
 
-  const featuredProducts = useSelector((state)=>state.general.featuredProducts);
+  const featuredProducts = useSelector((state: AppState) => state.general.featuredProducts);
   return (
     <div className="min-h-screen bg-background">
       <Header />

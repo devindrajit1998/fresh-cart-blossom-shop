@@ -21,98 +21,11 @@ import NotFound from "./pages/NotFound";
 import { useSelector, useDispatch } from "react-redux";
 import { initializeAuth } from "@/utils/slices/AuthSlice";
 import { fetchProfile } from "./utils/slices/ProfileSlice";
+import { ProtectedRoute, PublicRoute } from "@/components/auth/RouteGuards";
+import Loader from "@/components/common/Loader";
+import { AppState } from "@/types";
 
 const queryClient = new QueryClient();
-
-type AppState = {
-  auth: {
-    session_token: string | null;
-    refresh_token: string | null;
-    user: any;
-    loading: boolean;
-    error: string | null;
-    authInitialized: boolean;
-  };
-};
-
-// ProtectedRoute: Only for authenticated users
-function ProtectedRoute({ children }) {
-  const user = useSelector((state: AppState) => state.auth.session_token);
-  return user ? children : <Navigate to="/login" replace />;
-}
-
-// PublicRoute: Only for unauthenticated users
-function PublicRoute({ children }) {
-  const user = useSelector((state: AppState) => state.auth.session_token);
-  return !user ? children : <Navigate to="/profile" replace />;
-}
-
-const Loader = () => (
-  <div
-    style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100vh",
-      width: "100vw",
-      background: "#fff",
-      zIndex: 9999,
-      position: "fixed",
-      top: 0,
-      left: 0,
-    }}
-  >
-    {/* From Uiverse.io by Nawsome */}
-    <svg className="pl" width={240} height={240} viewBox="0 0 240 240">
-      <circle
-        className="pl__ring pl__ring--a"
-        cx={120}
-        cy={120}
-        r={105}
-        fill="none"
-        stroke="#000"
-        strokeWidth={20}
-        strokeDasharray="0 660"
-        strokeDashoffset={-330}
-        strokeLinecap="round"
-      />
-      <circle
-        className="pl__ring pl__ring--b"
-        cx={120}
-        cy={120}
-        r={35}
-        fill="none"
-        stroke="#000"
-        strokeWidth={20}
-        strokeDasharray="0 220"
-        strokeDashoffset={-110}
-        strokeLinecap="round"
-      />
-      <circle
-        className="pl__ring pl__ring--c"
-        cx={85}
-        cy={120}
-        r={70}
-        fill="none"
-        stroke="#000"
-        strokeWidth={20}
-        strokeDasharray="0 440"
-        strokeLinecap="round"
-      />
-      <circle
-        className="pl__ring pl__ring--d"
-        cx={155}
-        cy={120}
-        r={70}
-        fill="none"
-        stroke="#000"
-        strokeWidth={20}
-        strokeDasharray="0 440"
-        strokeLinecap="round"
-      />
-    </svg>
-  </div>
-);
 
 const App = () => {
   const dispatch = useDispatch();

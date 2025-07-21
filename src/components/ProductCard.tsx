@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { openProductModal } from "@/utils/slices/generalSlice";
+import { openProductModal } from "@/utils/slices/GeneralSlice";
 import { useDispatch } from "react-redux";
 export default function ProductCard(props) {
   const { product } = props;
